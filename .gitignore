@@ -1,0 +1,35 @@
+# Node modules
+node_modules/
+
+# Arquivos de build
+dist/
+build/
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Variáveis de ambiente
+.env
+.env.local
+.env.*.local
+
+# Cache e output temporário
+.cache/
+.tmp/
+*.tsbuildinfo
+
+# IDEs/editores
+.vscode/
+.idea/
+*.sw?
+
+# Testes
+coverage/
