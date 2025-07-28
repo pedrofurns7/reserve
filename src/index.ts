@@ -15,9 +15,11 @@ import { authorize } from './external/api/AuthorizeMiddleware'
 import RegistrarMesa from './core/mesa/service/RegistrarMesa'
 import { ListarMesa } from './core/mesa/service/ListarMesa'
 import  ListarMesaController from './external/api/ListarMesaController'
+import AtualizarMesaController from './external/api/AtualizarMesaController'
+import  AtualizarMesa from './core/mesa/service/AtualizarMesa'
 
 const app = express()
-const porta = process.env.API_PORT ?? 4000
+const porta = process.env.API_PORT ?? 4001
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
@@ -46,7 +48,7 @@ new LoginUsuarioController(app, loginUsuario)
 
 const usuarioMid = UsuarioMiddleware(repositorioUsuario)
 
-const authorizeMid = authorize
+const authorizeMid = authorize(["admin"])
 
 const repositorioMesa = new RepositorioMesaPg()
 
@@ -54,8 +56,13 @@ const registrarMesa = new RegistrarMesa(
     repositorioMesa
 )
 
-new RegistrarMesaController(app, registrarMesa)
+new RegistrarMesaController(app, registrarMesa, usuarioMid, authorizeMid)
 
 const listarMesas = new ListarMesa(repositorioMesa)
 
-new ListarMesaController(app, listarMesas)
+new ListarMesaController(app, listarMesas, usuarioMid)
+
+
+const atualizarMesa = new AtualizarMesa(repositorioMesa)
+
+new AtualizarMesaController(app, atualizarMesa)

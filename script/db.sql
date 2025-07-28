@@ -4,11 +4,9 @@ create table usuarios (
     id uuid primary key,
     nome varchar (255) not null,
     email varchar (255) not null,
-    senha varchar (255) not null
+    senha varchar (255) not null,
+    role varchar (20) not null
 );
-
-ALTER TABLE usuarios
-ADD COLUMN role varchar(20) not null ;
 
 
 create table mesas(

@@ -2,8 +2,8 @@ import { ListarMesa } from '../../core/mesa/service/ListarMesa'
 import { Express } from "express"
 
 export default class ListarMesaController {
-    constructor(servidor: Express, casoDeUso: ListarMesa){
-        servidor.get("/api/mesa/listar", async(req, res) => {
+    constructor(servidor: Express, casoDeUso: ListarMesa, ...middlewares: any[]){
+        servidor.get("/api/mesa/listar", ...middlewares,async(req, res) => {
             try{
                 const mesa = await casoDeUso.executar();
                 res.status(200).json(mesa);

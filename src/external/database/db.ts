@@ -4,9 +4,9 @@ const pgp = pgPromise()
 const db = pgp({
     host: 'localhost',
     port: 5432,
-    database: 'reservation',
+    database: 'reserve',
     user: "postgres",
-    password: '1234'
+    password: "admin"
 })
 
 export default db
