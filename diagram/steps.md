@@ -11,13 +11,27 @@
     - Listagem: Listar todas as mesas disponíveis no restaurante. ✅
     - Criar Mesa: Administradores podem adicionar novas mesas ao sistema com um nome e capacidade de pessoas. ✅
     - Status da Mesa: Cada mesa pode estar disponível, reservada ou inativa. ✅ 
-    - Implementação do método de atualização de mesas ✅ 
+    - Implementação do método de atualização de mesas ✅ (incluir validação de usuário logado)
+        - mudar atualização para patch ✅
 
 3. Sistema de Reservas
-    - Criar Reserva: Usuários autenticados podem criar reservas para mesas específicas.
-    - Verificar Disponibilidade: A API deve verificar se a mesa está disponível no horário solicitado antes de confirmar a reserva.
-    - Cancelar Reserva: Usuários podem cancelar suas reservas, o que libera a mesa para novas reservas.
+    - Criar Reserva: Usuários autenticados podem criar reservas para mesas específicas. ⚠️
+        - criar endpoint ✅
+        - verificar se mesa passada está com status 'disponivel' ⚠️ *next step*
+        - realizar atualização no status da mesa ✅
+        - marcar para data e hora futura ⚠️
+        - receber no endpoint a qtd de lugares na mesa apenas para validar se a mesa passada podera ser utilizada ⚠️
+        - verificar se a mesa passada esta disponivel no momento informado ⚠️
+    - Verificar Disponibilidade: A API deve verificar se a mesa está disponível no horário solicitado antes de confirmar a reserva. ⚠️
+    - Cancelar Reserva: Usuários podem cancelar suas reservas, o que libera a mesa para novas reservas. ⚠️
 
 4. Controle de Status
     - Status das Mesas: Mesas ficam reservadas automaticamente ao serem associadas a uma reserva.
     - Status das Reservas: Reservas têm status ativo quando confirmadas e cancelado quando canceladas.
+
+----
+
+### documentação dos desafios encontrados durante desenvolvimento
+
+- problemas com o date 
+- ao tentar reaproveitar o atualizarMesa para a funcionalidade de reserva foi necessário transformar em patch para não altear todos os campos, porém foi verificado que na query também seria necessário realizar uma alteração pois ela estava atualizando todos os dados, foi ajustado para criar a query dinamicamente, realizando uma verificação nos campos enviados e atualizando somente estes.

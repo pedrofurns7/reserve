@@ -23,11 +23,49 @@ export default class RepositorioMesa {
       status: row.status,
     }))
   }
-  //verificar se isso é posicional, e testar corretamente para ver se está funcionando
+
+ 
   async atualizar(id: string, dados: Partial<Mesa>): Promise<void> {
-    await db.none(
-      "UPDATE mesas SET nome = $1, capacidade = $2,status = $3 WHERE id = $4",
-      [dados.nome, dados.capacidade, dados.status, id]
-    )
+    const campos = []
+    const valores = []
+    let index = 1
+
+    if (dados.nome !== undefined) {
+      campos.push(`nome = $${index++}`)
+      valores.push(dados.nome)
+    }
+
+    if (dados.capacidade !== undefined) {
+      campos.push(`capacidade = $${index++}`)
+      valores.push(dados.capacidade)
+    }
+
+    if (dados.status !== undefined) {
+      campos.push(`status = $${index++}`)
+      valores.push(dados.status)
+    }
+
+    if (campos.length === 0) {
+      throw new Error("Nenhum dado informado para atualização.")
+    }
+
+    valores.push(id) 
+    const query = `UPDATE mesas SET ${campos.join(", ")} WHERE id = $${index}`
+
+    await db.none(query, valores)
+  }
+
+  async buscarPorId(id: string): Promise<Mesa | null>{
+    const row = await db.oneOrNone("SELECT * FROM mesas WHERE id = $1", [id])
+    if(!row) {
+      return null
+    } 
+
+    return {
+      id: row.id,
+      nome: row.nome,
+      capacidade: row.capacidade,
+      status: row.status,
+    }
   }
 }

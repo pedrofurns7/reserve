@@ -17,6 +17,12 @@ import { ListarMesa } from './core/mesa/service/ListarMesa'
 import  ListarMesaController from './external/api/ListarMesaController'
 import AtualizarMesaController from './external/api/AtualizarMesaController'
 import  AtualizarMesa from './core/mesa/service/AtualizarMesa'
+import RepositorioReservaPg from './external/database/RepositorioReservaPg'
+import RegistrarReservaController from './external/api/RegistrarReservaController'
+import RegistrarReserva from './core/reserva/service/RegistrarReserva'
+import { BuscarMesa } from './core/mesa/service/BuscarMesa'
+
+
 
 const app = express()
 const porta = process.env.API_PORT ?? 4001
@@ -50,6 +56,9 @@ const usuarioMid = UsuarioMiddleware(repositorioUsuario)
 
 const authorizeMid = authorize(["admin"])
 
+
+
+
 const repositorioMesa = new RepositorioMesaPg()
 
 const registrarMesa = new RegistrarMesa(
@@ -66,3 +75,14 @@ new ListarMesaController(app, listarMesas, usuarioMid)
 const atualizarMesa = new AtualizarMesa(repositorioMesa)
 
 new AtualizarMesaController(app, atualizarMesa)
+
+const buscarMesa = new BuscarMesa(repositorioMesa)
+
+
+//-rotas reservas
+
+const repositorioReserva = new RepositorioReservaPg()
+
+const registrarReserva = new RegistrarReserva(repositorioReserva, atualizarMesa, buscarMesa)
+
+new RegistrarReservaController(app, registrarReserva)
