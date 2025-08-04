@@ -16,6 +16,7 @@ export default class RegistrarReservaController {
             usuarioId: req.body.usuarioId,
             mesaId: req.body.mesaId,
             dataReserva: new Date(req.body.dataReserva),
+            quantidadePessoas: req.body.quantidadePessoas,
             status: "ativo", // ou 'cancelado', dependendo do caso
           })
           res.status(201).send()

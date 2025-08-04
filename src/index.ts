@@ -85,4 +85,4 @@ const repositorioReserva = new RepositorioReservaPg()
 
 const registrarReserva = new RegistrarReserva(repositorioReserva, atualizarMesa, buscarMesa)
 
-new RegistrarReservaController(app, registrarReserva)
+new RegistrarReservaController(app, registrarReserva)   

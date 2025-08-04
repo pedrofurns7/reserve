@@ -3,5 +3,6 @@ export default interface IMesa {
     usuarioId: string, // ID do usuário que criou a mesa
     mesaId: string, // ID da mesa reservada
     dataReserva: Date, // Data e hora da reserva
+    quantidadePessoas: number // Quantidade de pessoas na reserva
     status: 'ativo' | 'cancelado' // Indica se a reserva está ativa ou cancelada
 }

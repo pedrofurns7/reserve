@@ -13,12 +13,21 @@ export default class RegistrarReserva implements CasoDeUso<Reserva, void> {
   ) {}
 
   async executar(reserva: Reserva): Promise<void> {
+    const hoje = new Date()
+
     const novaReserva: Reserva = {
       id: Id.gerarHash(),
       usuarioId: reserva.usuarioId,
       mesaId: reserva.mesaId,
       dataReserva: reserva.dataReserva,
+      quantidadePessoas: reserva.quantidadePessoas,
       status: reserva.status,
+    }
+
+    const disponivel = await this.repositorio.estaDisponivel(reserva.mesaId, reserva.dataReserva);
+
+    if (!disponivel) {
+      throw new Error("A mesa já está reservada nesta data");
     }
 
     if(novaReserva.dataReserva < new Date()) {
@@ -28,8 +37,12 @@ export default class RegistrarReserva implements CasoDeUso<Reserva, void> {
     //inserir validação para verificar se a mesa está disponível
     const mesa = await this.buscarMesa.executar(reserva.mesaId)
 
-    if (!mesa || mesa.status !== 'disponivel') {
-        throw new Error("Mesa não disponível para reserva.")
+    if(!mesa) {
+        throw new Error("Mesa não encontrada.")
+    }
+
+    if(mesa.capacidade < reserva.quantidadePessoas) {
+      throw new Error("Quantidade de pessoas excede a capacidade da mesa.")
     }
 
     await this.repositorio.inserir(novaReserva)
