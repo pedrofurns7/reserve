@@ -7,7 +7,7 @@
     - Login: Usuários autenticados recebem um token JWT para acesso às funcionalidades de reservas.✅
     - Restrição de Acesso: Apenas usuários logados podem criar e visualizar reservas. **NEXT STEP**  atualmente está funcionando apenas o middleware de autenticação(token usuario)
     
-2. Gestão de Mesas 
+2. Gestão de Mesas dasd
     - Listagem: Listar todas as mesas disponíveis no restaurante. ✅
     - Criar Mesa: Administradores podem adicionar novas mesas ao sistema com um nome e capacidade de pessoas. ✅
     - Status da Mesa: Cada mesa pode estar disponível, reservada ou inativa. ✅ 
@@ -27,7 +27,7 @@
 
 4. Controle de Status
     - Status das Mesas: Mesas ficam reservadas automaticamente ao serem associadas a uma reserva. ✅
-    - Status das Reservas: Reservas têm status ativo quando confirmadas e cancelado quando canceladas. ⚠️
+    - Status das Reservas: Reservas têm status ativo quando confirmadas e cancelado quando canceladas. ✅
 
 ----
 

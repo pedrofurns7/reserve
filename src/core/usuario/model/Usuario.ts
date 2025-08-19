@@ -1,5 +1,5 @@
 export type UserRole = 'viewer' | 'editor';
-export default interface Usuario {
+export default interface IUsuario {
     id?: string, 
     nome: string, 
     email: string,

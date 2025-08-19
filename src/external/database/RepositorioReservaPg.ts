@@ -1,7 +1,8 @@
 import Reserva from "@/core/reserva/model/Reserva"
 import db from "./db"
+import RepositorioReserva from "@/core/reserva/service/RepositorioReserva";
 
-export default class RepositorioReserva {
+export default class RepositorioReservaPg implements RepositorioReserva {
   private static readonly items: Reserva[] = []
 
   async inserir(reserva: Reserva) {
@@ -18,6 +19,22 @@ export default class RepositorioReserva {
         reserva.status,
       ]
     )
+  }
+
+
+  async buscarPorId(reservaId: string): Promise<Reserva | null> {
+    const result = await db.oneOrNone(
+      `SELECT * FROM reservas WHERE id = $1`,
+      [reservaId]
+    );
+    return result ? result : null;
+  }
+
+  async atualizarStatus(reservaId: string, status: string): Promise<void> {
+    await db.query(
+      `UPDATE reservas SET status = $1 WHERE id = $2`,
+      [status, reservaId]
+    );
   }
 
   async estaDisponivel(mesaId: string, dataReserva: Date): Promise<boolean> {

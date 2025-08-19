@@ -8,13 +8,14 @@ create table usuarios (
     role varchar (20) not null
 );
 
+\c reserve;
 
 create table mesas(
     id uuid primary key,
     nome varchar (255) not null,
     capacidade INTEGER not null,
     status varchar (20) not null DEFAULT 'disponivel'
-)
+);
 
 
 

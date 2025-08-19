@@ -21,11 +21,13 @@ import RepositorioReservaPg from './external/database/RepositorioReservaPg'
 import RegistrarReservaController from './external/api/RegistrarReservaController'
 import RegistrarReserva from './core/reserva/service/RegistrarReserva'
 import { BuscarMesa } from './core/mesa/service/BuscarMesa'
+import CancelarReserva from './core/reserva/service/CancelarReserva'
+import CancelarReservaController from './external/api/CancelarReservaController'
 
 
 
 const app = express()
-const porta = process.env.API_PORT ?? 4001
+const porta = process.env.API_PORT ?? 4001  
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
@@ -83,6 +85,14 @@ const buscarMesa = new BuscarMesa(repositorioMesa)
 
 const repositorioReserva = new RepositorioReservaPg()
 
+//registrar
+
 const registrarReserva = new RegistrarReserva(repositorioReserva, atualizarMesa, buscarMesa)
 
 new RegistrarReservaController(app, registrarReserva)   
+
+//cancelar
+
+const cancelarReserva = new CancelarReserva(repositorioReserva)
+
+new CancelarReservaController(app, cancelarReserva)

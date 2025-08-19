@@ -1,4 +1,4 @@
-export default interface IMesa {
+export default interface IReserva {
     id?: string,        
     usuarioId: string, // ID do usuário que criou a mesa
     mesaId: string, // ID da mesa reservada
