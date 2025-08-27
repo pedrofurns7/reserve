@@ -2,7 +2,7 @@
 node_modules/
 
 # Arquivos de build
-dist/
+
 build/
 
 # Logs
@@ -35,4 +35,4 @@ Thumbs.db
 coverage/
 
 start.sh
-.pem
+reserve-app2-ec2.pem
