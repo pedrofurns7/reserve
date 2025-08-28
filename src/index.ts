@@ -1,6 +1,10 @@
 import dotenv from 'dotenv'
 dotenv.config()
 
+import 'module-alias/register';
+import express from 'express'
+
+
 import UsuarioMiddleware from './external/api/UsuarioMiddleware'
 import SenhaCripto from './external/auth/SenhaCripto'
 import RepositorioUsuarioPg from './external/database/RepositorioUsuarioPg'
@@ -10,7 +14,6 @@ import LoginUsuarioController from './external/api/LoginUsuarioController'
 import LoginUsuario from './core/usuario/service/LoginUsuario'
 import RepositorioMesaPg from './external/database/RepositorioMesaPg'
 import RegistrarMesaController from './external/api/RegistrarMesaController'
-import express from 'express'
 import { authorize } from './external/api/AuthorizeMiddleware'
 import RegistrarMesa from './core/mesa/service/RegistrarMesa'
 import { ListarMesa } from './core/mesa/service/ListarMesa'

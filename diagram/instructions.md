@@ -367,6 +367,7 @@ ls -l /path/to/your-key.pem
 
 ```sh
 ssh -i /path/to/your-key.pem ec2-user@your-ec2-public-ip
+
 ```
 
 Example:  

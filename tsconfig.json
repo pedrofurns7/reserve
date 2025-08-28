@@ -7,10 +7,10 @@
         "forceConsistentCasingInFileNames": true,
         "strict": true,
         "skipLibCheck": true,
-        "baseUrl": ".",
+        "baseUrl": "src",
         "paths": {
             "@/test/*": ["test/*"],
-            "@/*": ["src/*"]
+            "@/*": ["*"]
         }
     }
 }
